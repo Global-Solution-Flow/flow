@@ -1,64 +1,54 @@
 import { useState } from 'react';
 import { MOCK_MAQUINAS, MOCK_PREDICAO } from '../../data/Mocks.tsx';
 import type { Maquina, PredicaoIA } from '../../data/Mocks.tsx';
+import type { DragEndEvent } from '@dnd-kit/core';
+import { DndContext } from '@dnd-kit/core';
+
+import { MaquinaDraggable } from '../../components/MaquinaDraggable/MaquinaDraggable.tsx';
+import { GridDroppable } from '../../components/GridDroppable/GridDroppable.tsx';
 
 export function Estudio() {
-
   const [biblioteca] = useState<Maquina[]>(MOCK_MAQUINAS);
   const [predicao] = useState<PredicaoIA>(MOCK_PREDICAO);
 
-  const gargalo = biblioteca.find(
-    (m) => m.id === predicao.maquinaGargaloId,
-  );
+  // 2. Crie a função que será chamada QUANDO você soltar um item
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
 
+    // 'active' é o item que você arrastou
+    // 'over' é a área onde você soltou
+    if (over && over.id === 'grid-canvas') {
+      console.log('Você soltou a máquina!', active.id);
+      //
+      // AQUI você vai:
+      // 1. Adicionar a máquina (active.id) ao seu "grid"
+      // 2. Chamar a API de predição da IA
+      //
+    }
+  }
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-80px)]">
-      {/* Coluna 1: Biblioteca de Máquinas */}
-      <aside className="w-full md:w-1/4 h-full p-4 bg-gray-800 overflow-y-auto">
-        <h2 className="text-xl font-bold mb-4">Biblioteca de Máquinas</h2>
-        <div className="flex flex-col gap-4">
-          {biblioteca.map((maquina) => (
-            <div
-              key={maquina.id}
-              className="p-3 bg-gray-700 rounded-lg cursor-grab hover:bg-blue-600 transition-colors"
-            >
-              <h3 className="font-semibold">{maquina.nome}</h3>
-              <p className="text-sm text-gray-300">
-                Tempo: {maquina.tempoCicloSeg}s
-              </p>
-            </div>
-          ))}
-        </div>
-      </aside>
+    <DndContext onDragEnd={handleDragEnd}>
+      <div className="flex flex-col md:flex-row h-[calc(100vh-80px)]">
+        {/* Coluna 1: Biblioteca (Atualizada) */}
+        <aside className="w-full md:w-1/4 h-full p-4 bg-gray-800 overflow-y-auto">
+          <h2 className="text-xl font-bold mb-4">Biblioteca de Máquinas</h2>
+          <div className="flex flex-col gap-4">
+            {biblioteca.map((maquina) => (
+              <MaquinaDraggable key={maquina.id} maquina={maquina} />
+            ))}
+          </div>
+        </aside>
 
-      {/* Coluna 2: O Grid (Canvas) */}
-      <main className="w-full md:w-1/2 h-full p-4">
-        <div className="w-full h-full bg-gray-800 border-2 border-dashed border-gray-600 rounded-lg">
-          <p className="p-4 text-gray-500">
-            Arraste as máquinas para cá...
-          </p>
-        </div>
-      </main>
+        {/* Coluna 2: O Grid (Atualizado) */}
+        <main className="w-full md:w-1/2 h-full p-4">
+          <GridDroppable />
+        </main>
 
-      {/* Coluna 3: Dashboard da IA */}
-      <aside className="w-full md:w-1/4 h-full p-4 bg-gray-800">
-        <h2 className="text-xl font-bold mb-4">Análise da IA</h2>
-        <div className="p-4 bg-gray-700 rounded-lg">
-          <h3 className="text-lg font-semibold">Tempo de Ciclo Total:</h3>
-          <p className="text-3xl font-bold text-blue-400">
-            {predicao.tempoCicloTotal} segundos
-          </p>
-        </div>
-
-        <div className="mt-4 p-4 bg-gray-700 rounded-lg">
-          <h3 className="text-lg font-semibold">Alerta de Gargalo:</h3>
-          {gargalo ? (
-            <p className="text-2xl font-bold text-red-400">{gargalo.nome}</p>
-          ) : (
-            <p className="text-xl font-bold text-green-400">Nenhum Gargalo</p>
-          )}
-        </div>
-      </aside>
-    </div>
+        {/* Coluna 3: Dashboard da IA */}
+        <aside className="w-full md:w-1/4 h-full p-4 bg-gray-800">
+          {/* ... (O dashboard da IA) ... */}
+        </aside>
+      </div>
+    </DndContext>
   );
 }
