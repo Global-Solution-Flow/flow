@@ -5,8 +5,8 @@ import './globals.css'
 
 import App from './App.tsx';
 import { Home } from './pages/Home/Home.tsx';
-import { Estudio } from './pages/Estudio/Estudio.tsx';
 import { Integrantes } from './pages/Integrantes/Integrantes.tsx';
+import Estudio from './pages/Estudio/Estudio.tsx';
 
 // Define as rotas
 const router = createBrowserRouter([
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <Home /> },
-      { path: '/estudio', element: <Estudio /> },
+      { path: '/estudio', element: <Estudio/> },
       { path: '/integrantes', element: <Integrantes /> },
     ],
   },

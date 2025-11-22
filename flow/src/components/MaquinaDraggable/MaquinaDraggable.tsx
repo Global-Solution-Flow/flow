@@ -1,14 +1,11 @@
-import { useDraggable } from '@dnd-kit/core';
-import type { Maquina } from '../../data/Mocks.tsx';
+import { useDraggable } from "@dnd-kit/core";
+import type { Maquina } from "../../data/Mocks";
 
-interface Props {
-  maquina: Maquina;
-}
+type Props = { maquina: Maquina };
 
-export function MaquinaDraggable({ maquina }: Props) {
-
+export default function MaquinaDraggable({ maquina }: Props) {
   const { attributes, listeners, setNodeRef } = useDraggable({
-    id: maquina.id, 
+    id: `lib-${maquina.id}`,
   });
 
   return (
@@ -16,10 +13,9 @@ export function MaquinaDraggable({ maquina }: Props) {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className="p-3 bg-gray-700 rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-600 transition-colors"
+      className="p-3 bg-gray-200 rounded-lg shadow-md cursor-grab active:cursor-grabbing text-black"
     >
-      <h3 className="font-semibold">{maquina.nome}</h3>
-      <p className="text-sm text-gray-300">Tempo: {maquina.tempoCicloSeg}s</p>
+      {maquina.nome}
     </div>
   );
 }

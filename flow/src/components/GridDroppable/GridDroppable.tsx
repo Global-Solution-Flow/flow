@@ -1,23 +1,32 @@
-import { useDroppable } from '@dnd-kit/core';
+import { useDroppable } from "@dnd-kit/core";
+import { MaquinaDraggable } from "../MaquinaDraggable/MaquinaDraggable";
 
-export function GridDroppable() {
-  // 1. Hook do dnd-kit
-  const { isOver, setNodeRef } = useDroppable({
-    id: 'grid-canvas', // O ID único da área
+export function GridDroppable({ items }) {
+  const { setNodeRef } = useDroppable({
+    id: "grid-canvas",
   });
-
-  // 2. Muda o estilo se estiver arrastando por cima
-  const style = isOver
-    ? 'border-green-500 bg-gray-700'
-    : 'border-gray-600 bg-gray-800';
 
   return (
     <div
       ref={setNodeRef}
-      className={`w-full h-full border-2 border-dashed rounded-lg transition-colors ${style}`}
+      id="grid-canvas"
+      className="relative w-full h-full bg-gray-700 rounded-lg border border-gray-500"
     >
-      <p className="p-4 text-gray-500">Arraste as máquinas para cá...</p>
-      {/* Aqui você vai renderizar as máquinas que já estão no grid */}
+      {items.map((item) => (
+        <div
+          key={item.id + item.x + item.y}
+          className="absolute"
+          style={{
+            left: item.x,
+            top: item.y,
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <div className="bg-blue-300 text-black px-3 py-2 rounded-lg shadow-lg">
+            {item.nome}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
