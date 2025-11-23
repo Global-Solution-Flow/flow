@@ -1,6 +1,7 @@
 // src/components/GridCanvas.tsx
 import React from "react";
-import CanvasItem, { CanvasItemType } from "./CanvasItem";
+import CanvasItem from "./CanvasItem";
+import type { CanvasItemType } from "./CanvasItem";
 
 type Props = {
   items: CanvasItemType[];

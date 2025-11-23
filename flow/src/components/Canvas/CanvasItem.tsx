@@ -3,9 +3,9 @@ import React from "react";
 
 export type CanvasItemType = {
   instanceId: string;
-  idLtyMaquina?: number | null; 
-  idMaquina: number;           
-  nome?: string;               
+  idLtyMaquina?: number | null;
+  idMaquina: number;
+  nome?: string;
   x: number;
   y: number;
   largura?: number;
@@ -14,7 +14,7 @@ export type CanvasItemType = {
 
 type Props = {
   item: CanvasItemType;
-  containerRef: React.RefObject<HTMLElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   onChangePosition: (instanceId: string, x: number, y: number) => void;
   onDrop: (instanceId: string, x: number, y: number) => void;
 };
@@ -51,7 +51,11 @@ export default function CanvasItem({ item, containerRef, onChangePosition, onDro
       const clampedX = Math.min(Math.max(0, rawX), maxX);
       const clampedY = Math.min(Math.max(0, rawY), maxY);
 
-      onChangePosition(item.instanceId, Math.round(clampedX * 100) / 100, Math.round(clampedY * 100) / 100);
+      onChangePosition(
+        item.instanceId,
+        Math.round(clampedX * 100) / 100,
+        Math.round(clampedY * 100) / 100
+      );
     }
 
     function onPointerUp(ev: PointerEvent) {
@@ -64,8 +68,10 @@ export default function CanvasItem({ item, containerRef, onChangePosition, onDro
       if (!container) return;
       const crect = container.getBoundingClientRect();
       const rect = node.getBoundingClientRect();
+
       const finalX = Math.round((rect.left - crect.left) * 100) / 100;
       const finalY = Math.round((rect.top - crect.top) * 100) / 100;
+
       onDrop(item.instanceId, finalX, finalY);
     }
 
