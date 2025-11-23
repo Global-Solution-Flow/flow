@@ -1,4 +1,3 @@
-// src/data/MOCK_MAQUINAS.ts
 export type Maquina = {
   id: string;  
   nome: string;

@@ -1,4 +1,4 @@
-// src/api/layoutMaquinaApi.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const BASE_URL = import.meta.env.VITE_API_FLOW;
 
 export type LtyMaquinaPayload = {
@@ -53,9 +53,8 @@ export async function deleteLtyMaquina(id: number) {
   return parseResponse(res);
 }
 
-/**
- * Novas funções para trabalhar com layouts salvos
- * (a resposta exata do backend pode variar; estou assumindo um formato padrão)
+/*
+Novas funções para trabalhar com layouts salvos
  */
 export async function getLayoutSalvoById(layoutId: number) {
   const url = `${BASE_URL}/layouts-salvos/${layoutId}`;
