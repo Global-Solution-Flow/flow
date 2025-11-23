@@ -1,4 +1,3 @@
-// src/components/CanvasItem.tsx
 import React from "react";
 
 export type CanvasItemType = {
@@ -29,11 +28,12 @@ export default function CanvasItem({ item, containerRef, onChangePosition, onDro
     if (!node) return;
 
     function onPointerDown(ev: PointerEvent) {
-      try { node.setPointerCapture(ev.pointerId); } catch {}
+      try { node?.setPointerCapture(ev.pointerId); } catch {}
       dragging.current = true;
-      const rect = node.getBoundingClientRect();
+      const rect = node!.getBoundingClientRect();
       pointerOffset.current = { x: ev.clientX - rect.left, y: ev.clientY - rect.top };
-      node.style.cursor = "grabbing";
+      node!.style.cursor = "grabbing";
+      node!.style.zIndex = "9999";
     }
 
     function onPointerMove(ev: PointerEvent) {
@@ -61,13 +61,16 @@ export default function CanvasItem({ item, containerRef, onChangePosition, onDro
     function onPointerUp(ev: PointerEvent) {
       if (!dragging.current) return;
       dragging.current = false;
-      try { node.releasePointerCapture(ev.pointerId); } catch {}
-      node.style.cursor = "grab";
+      try { node?.releasePointerCapture(ev.pointerId); } catch {}
+      if (node) {
+          node.style.cursor = "grab";
+          node.style.zIndex = "auto";
+      }
 
       const container = containerRef.current;
       if (!container) return;
       const crect = container.getBoundingClientRect();
-      const rect = node.getBoundingClientRect();
+      const rect = node!.getBoundingClientRect();
 
       const finalX = Math.round((rect.left - crect.left) * 100) / 100;
       const finalY = Math.round((rect.top - crect.top) * 100) / 100;
@@ -86,6 +89,7 @@ export default function CanvasItem({ item, containerRef, onChangePosition, onDro
     };
   }, [containerRef, item, onChangePosition, onDrop]);
 
+  // ESTILO DARK/TECH ATUALIZADO
   const style: React.CSSProperties = {
     position: "absolute",
     left: item.x,
@@ -93,21 +97,31 @@ export default function CanvasItem({ item, containerRef, onChangePosition, onDro
     width: item.largura ?? 120,
     height: item.altura ?? 70,
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     cursor: "grab",
     userSelect: "none",
-    borderRadius: 8,
-    boxShadow: "0 6px 12px rgba(0,0,0,0.18)",
-    background: "linear-gradient(180deg,#f2f8ff,#e6f0ff)",
-    border: "1px solid rgba(0,0,0,0.08)",
-    padding: 6,
+    borderRadius: "8px",
+    background: "linear-gradient(145deg, #1e293b, #0f172a)", 
+    border: "1px solid #3b82f6", 
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)",
+    padding: "8px",
     touchAction: "none",
+    color: "#ffffff",
+    fontFamily: "sans-serif",
+    fontSize: "0.9rem",
+    textAlign: "center",
+    transition: "box-shadow 0.2s",
   };
 
   return (
     <div ref={elRef} style={style} role="button" aria-label={item.nome ?? `maquina-${item.idMaquina}`}>
-      <div style={{ fontWeight: 700 }}>{item.nome ?? `Máquina ${item.idMaquina}`}</div>
+      {/* Um pequeno indicador visual (bolinha) */}
+      <div style={{width: 8, height: 8, borderRadius: '50%', background: '#10b981', marginBottom: 6}}></div>
+      <div style={{ fontWeight: 600, textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
+        {item.nome ?? `Máquina ${item.idMaquina}`}
+      </div>
     </div>
   );
 }
