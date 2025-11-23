@@ -4,7 +4,7 @@
 
 O **Flow** é uma plataforma que ajuda engenheiros de produção a criar, simular e otimizar layouts de fábrica em tempo real.
 
-<!-- Badges: substitua conforme necessário -->
+
 ![Status](https://img.shields.io/badge/status-concluído-purple)
 ![React](https://img.shields.io/badge/React-19-blue)
 ![Vite](https://img.shields.io/badge/Vite-7-purple)
@@ -62,6 +62,12 @@ O Flow permite:
    http://localhost:5173
    ```
 
+
+## 🔗 Links Importantes
+
+Aplicação Web : [Vercel](https://flow-roan-one.vercel.app/)
+
+Pitch de Vendas : [Youtube](https://www.youtube.com/watch?v=eRsF0CucHWg)
 
 ## Autores
 | Nome | GitHub | LinkedIn |
