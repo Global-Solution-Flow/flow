@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Flow - Otimizador de Layout Industrial 4.0 🏭
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Global Solution 2025/2 - Análise e Desenvolvimento de Sistemas (FIAP)
 
-Currently, two official plugins are available:
+O **Flow** é uma plataforma que ajuda engenheiros de produção a criar, simular e otimizar layouts de fábrica em tempo real.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- Badges: substitua conforme necessário -->
+![Status](https://img.shields.io/badge/status-concluído-purple)
+![React](https://img.shields.io/badge/React-19-blue)
+![Vite](https://img.shields.io/badge/Vite-7-purple)
+![Tailwind](https://img.shields.io/badge/Tailwind-4-cyan)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Sumário
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Tecnologias](#tecnologias)
+- [Instalação](#instalação)
+- [Scripts úteis](#scripts-úteis)
+- [Configuração Tailwind](#configuração-tailwind)
+- [Deploy](#deploy)
+- [Autores](#autores)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Sobre o projeto
+O Flow permite:
+- Montagem visual via drag & drop
+- Cálculos preditivos de gargalos (serviço de IA)
+- Persistência de projetos via API
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tecnologias
+- Front-end: React, TypeScript, Vite, TailwindCSS, Dnd-Kit
+- Back-end: Java (Quarkus), Oracle DB
+- IA: Python (Flask), scikit-learn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Instalação
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Pré-requisitos
+- Node.js 18+
+- npm (ou yarn)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Passos
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/SEU-USUARIO/flow.git
+   cd flow
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. Instale dependências:
+   ```bash
+   npm install
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. Rode em modo desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+4. Abra no navegador:
+   ```
+   http://localhost:5173
+   ```
+
+
+## Autores
+| Nome | GitHub | LinkedIn |
+| :--- | :--- | :--- |
+| **Pedro Ferreira Gomes** | [Ferreira2120](https://github.com/Ferreira2120) | [Pedro Ferreira](https://www.linkedin.com/in/pedro-ferreira-a762532bb) |
+| **Gabriel Bebé Silva** | [Gabriel24701](https://github.com/Gabriel24701) | [Gabriel Bebé](https://www.linkedin.com/in/gabriel-bebé-298815238) |
+
+---
+
+FIAP 2025 - Todos os direitos reservados.
