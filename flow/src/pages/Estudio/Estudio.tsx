@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import GridCanvas from "../../components/Canvas/GridCanvas";
 import type { CanvasItemType } from "../../components/Canvas/CanvasItem";
 import {
