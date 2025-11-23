@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDroppable } from "@dnd-kit/core";
-import { MaquinaDraggable } from "../MaquinaDraggable/MaquinaDraggable";
+import CanvasItem from "../Canvas/CanvasItem"; 
 
-export function GridDroppable({ items }) {
+export function GridDroppable({ items, onChangePosition, onDrop }: { items: any[], onChangePosition: any, onDrop: any }) {
   const { setNodeRef } = useDroppable({
     id: "grid-canvas",
   });
@@ -10,22 +11,16 @@ export function GridDroppable({ items }) {
     <div
       ref={setNodeRef}
       id="grid-canvas"
-      className="relative w-full h-full bg-gray-700 rounded-lg border border-gray-500"
+      className="relative w-full h-full bg-gray-800/50 rounded-xl border-2 border-dashed border-gray-700 overflow-hidden shadow-inner"
     >
       {items.map((item) => (
-        <div
-          key={item.id + item.x + item.y}
-          className="absolute"
-          style={{
-            left: item.x,
-            top: item.y,
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <div className="bg-blue-300 text-black px-3 py-2 rounded-lg shadow-lg">
-            {item.nome}
-          </div>
-        </div>
+        <CanvasItem
+          key={item.instanceId}
+          item={item}
+          containerRef={{ current: document.getElementById("grid-canvas") } as any}
+          onChangePosition={onChangePosition}
+          onDrop={onDrop}
+        />
       ))}
     </div>
   );
